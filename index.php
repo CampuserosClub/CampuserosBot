@@ -144,7 +144,7 @@ class CampuserosBot
                     $this->sendSticker($this->rand($value['stickers']));
                 } else {
                     if ($value === 'api') {
-                        $this->sendMessage('call api');
+                        $this->sendMessage('Tenho cara de cavalo, não de relógio.');
                     } else {
                         $this->params['disable_web_page_preview'] = true;
                         $this->sendMessage((is_array($value)) ? $this->rand($value) : $value);
