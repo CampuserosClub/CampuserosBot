@@ -144,7 +144,7 @@ class CampuserosBot
                     $this->sendSticker($this->rand($value['stickers']));
                 } else {
                     if ($value === 'api') {
-                        $this->sendMessage(self::callTimeTo(explode(strtoupper($key), strtoupper($text))[1]));
+                        // TODO
                     } else {
                         $this->params['disable_web_page_preview'] = true;
                         $this->sendMessage((is_array($value)) ? $this->rand($value) : $value);
@@ -152,50 +152,6 @@ class CampuserosBot
                 }
             }
         }
-    }
-
-    protected function callTimeTo($slug)
-    {
-      $slug = trim($slug);
-      if($slug == NULL){
-        return "Por favor, informe qual é a edição que desejas... Ex: quanto tempo falta CPBR, quanto tempo falta CPAR";
-      }else{
-        $content = file_get_contents("http://campuserosclub-api.herokuapp.com/editions/".$slug);
-        $json = json_decode($content);
-        if(!property_exists($json, "message")){
-          if(is_object($json->countdown)){
-            $return = "Para a #".strtoupper($json->slug).$json->number." falta ";
-
-            if($json->countdown->left->days == 1){
-              $return .= $json->countdown->left->days." dia ";
-            }elseif($json->countdown->left->days > 0){
-              $return .= $json->countdown->left->days." dias ";
-            }
-
-            if($json->countdown->left->hours == 1){
-              $return .= $json->countdown->left->hours." hora ";
-            }elseif($json->countdown->left->hours > 0){
-              $return .= $json->countdown->left->hours." hora(s) ";
-            }
-
-            if($json->countdown->left->minutes == 1){
-              $return .= $json->countdown->left->minutes." minuto ";
-            }elseif($json->countdown->left->minutes > 0){
-              $return .= $json->countdown->left->minutes." minuto(s) ";
-            }
-
-            $return .= $json->countdown->left->seconds." segundo(s)!";
-            return $return;
-
-          }elseif(is_bool($json->countdown)){
-            return "Opaaaa! A #".strtoupper($json->slug).$json->number." já ocorreu, e não tem uma próxima edição agendada... :/";
-          }else{
-            return $json->countdown;
-          }
-        }else{
-          return "Erro! Cara, não existe uma edição com esse slug! ".$slug;
-        }
-      }
     }
 
     protected function sendMessage($text)
