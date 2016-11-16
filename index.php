@@ -153,7 +153,7 @@ class CampuserosBot
             }
         }
     }
-
+    
     protected function sendMessage($text)
     {
         $this->actionTyping();
