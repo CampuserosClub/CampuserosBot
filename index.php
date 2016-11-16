@@ -162,7 +162,7 @@ class CampuserosBot
       }else{
         $content = file_get_contents("http://campuserosclub-api.herokuapp.com/editions/".$slug);
         $json = json_decode($content);
-        if(property_exists($json, "message")){
+        if(!property_exists($json, "message")){
           if(is_object($json->countdown)){
             $return = "Para a #".strtoupper($json->slug).$json->number." falta ";
 
