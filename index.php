@@ -115,7 +115,7 @@ class CampuserosBot
      */
     public function __construct()
     {
-        $this->telegram = new Telegram($this->token);
+        $this->telegram = new Telegram($this->token, true);
 
         $this->run();
     }
@@ -153,7 +153,7 @@ class CampuserosBot
             }
         }
     }
-    
+
     protected function sendMessage($text)
     {
         $this->actionTyping();
