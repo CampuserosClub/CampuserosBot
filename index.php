@@ -48,7 +48,7 @@ class CampuserosBot
      * Telegram Token
      * @var string
      */
-    protected $token = '264465611:AAGWW5A0idShoji3KmK_pt1APAYo3560xoI';
+    protected $token = '246482286:AAEvSsv3Y9kJJUxbWR5YIkH8XLD_92hwby0';
 
     /**
      * @var Telegram
