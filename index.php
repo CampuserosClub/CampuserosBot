@@ -144,7 +144,7 @@ class CampuserosBot
                     $this->sendSticker($this->rand($value['stickers']));
                 } else {
                     if ($value === 'api') {
-                        $this->sendMessage(callTimeTo(explode($key, $text)[1]));
+                        $this->sendMessage(self::callTimeTo(explode($key, $text)[1]));
                     } else {
                         $this->params['disable_web_page_preview'] = true;
                         $this->sendMessage((is_array($value)) ? $this->rand($value) : $value);
