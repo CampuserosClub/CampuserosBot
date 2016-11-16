@@ -158,7 +158,7 @@ class CampuserosBot
     {
       $slug = trim($slug);
       if($slug == NULL){
-        return "Por favor, informe qual é a edição que desejas... Ex: CPBR, CPAR...";
+        return "Por favor, informe qual é a edição que desejas... Ex: quanto tempo falta CPBR, quanto tempo falta CPAR";
       }else{
         $content = file_get_contents("http://campuserosclub-api.herokuapp.com/editions/".$slug);
         $json = json_decode($content);
