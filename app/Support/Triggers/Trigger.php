@@ -68,7 +68,7 @@ abstract class Trigger
      */
     protected function checkText($text, $check)
     {
-        return (str_contains(strtolower($text), strtolower($check)));
+        return (str_contains(strtolower($text), $check));
     }
 
     protected function handle()
