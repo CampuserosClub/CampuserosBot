@@ -9,6 +9,6 @@ class Sexta extends Trigger
     ];
 
     protected $gifs = [
-        'BQADAQADGAADUHrJCamTztNzkBBZAg',
+        'http://i.giphy.com/5uLOzZipGuz3G.gif',
     ];
 }
