@@ -13,4 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
+
+Route::get('setWebhook', 'WebhookController@define')->name('webhook.define');
+Route::get('infoWebhook', 'WebhookController@info')->name('webhook.info');
