@@ -11,6 +11,7 @@ abstract class Trigger
      */
     protected $triggers = [];
     protected $responses = [];
+    protected $stickers = [];
 
     /**
      * @var Api
@@ -67,12 +68,13 @@ abstract class Trigger
      */
     protected function checkText($text, $check)
     {
-        return (str_contains($text, $check));
+        return (str_contains(strtolower($text), strtolower($check)));
     }
 
     protected function handle()
     {
         $this->handleResponses();
+        $this->handleStickers();
 
         $this->run();
     }
@@ -85,6 +87,18 @@ abstract class Trigger
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->getId(),
                 'text' => $responses->random(),
+            ]);
+        }
+    }
+
+    protected function handleStickers()
+    {
+        $stickers = collect($this->stickers);
+
+        if (!$stickers->isEmpty()) {
+            $this->telegram->sendSticker([
+                'chat_id' => $this->chat->getId(),
+                'sticker' => $stickers->random(),
             ]);
         }
     }
