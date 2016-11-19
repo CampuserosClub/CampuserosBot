@@ -32,4 +32,5 @@ Route::get('infoWebhook', function() {
 
     echo $response->getBody();
 })->name('webhook.info');
+
 Route::post('webhook', 'WebhookController@handle')->name('webhook.handle');
