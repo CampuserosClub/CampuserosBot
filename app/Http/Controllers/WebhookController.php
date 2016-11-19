@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client as GuzzleHttpClient;
+use Telegram\Bot\Api;
 
 class WebhookController extends Controller
 {
+    /**
+     * @var Api
+     */
+    protected $telegram;
+
+    /**
+     * WebhookController constructor.
+     *
+     * @param Api $telegram
+     */
+    public function __construct(Api $telegram)
+    {
+        $this->telegram = $telegram;
+    }
+
     public function handle()
     {
         // TODO
-    }
-    public function define()
-    {
-        $url = 'https://api.telegram.org/bot'.env('TELEGRAM_BOT_TOKEN').'/setWebhook?url='.env('TELEGRAM_BOT_WEBHOOK');
-        $client = new GuzzleHttpClient();
-        $client->get($url);
-
-        return redirect()->route('webhook.info');
-    }
-
-    public function info()
-    {
-        $url = 'https://api.telegram.org/bot'.env('TELEGRAM_BOT_TOKEN').'/getWebhookInfo';
-        $client = new GuzzleHttpClient();
-        $response = $client->get($url);
-
-        echo $response->getBody();
     }
 }
