@@ -126,11 +126,16 @@ class CampuserosBot
 
         if (!empty($this->update->all())) {
             $this->message = $this->update->getMessage();
-            $this->chat = $this->message->getChat();
 
-            $this->params = ['chat_id' => $this->chat->getId()];
+            if (!is_null($this->message)) {
+                $this->chat = $this->message->getChat();
 
-            $this->processMessage();
+                if (!is_null($this->chat)) {
+                    $this->params = ['chat_id' => $this->chat->getId()];
+
+                    $this->processMessage();
+                }
+            }
         }
     }
 
