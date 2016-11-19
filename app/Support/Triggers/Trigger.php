@@ -53,12 +53,21 @@ abstract class Trigger
     protected function hasTrigger()
     {
         if (!is_null($message = $this->message->getText())) {
-            if (str_contains($message, $this->triggers)) {
-                return true;
-            }
+            return $this->checkText($message, $this->triggers);
         }
 
         return false;
+    }
+
+    /**
+     * @param $text
+     * @param $check
+     *
+     * @return bool
+     */
+    protected function checkText($text, $check)
+    {
+        return (str_contains($text, $check));
     }
 
     protected function handle()

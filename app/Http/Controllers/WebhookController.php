@@ -32,6 +32,7 @@ class WebhookController extends Controller
     protected $triggers = [
         \App\Support\Triggers\Grito::class,
         \App\Support\Triggers\Pizza::class,
+        \App\Support\Triggers\Treta::class,
     ];
 
     /**
