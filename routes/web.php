@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('setWebhook', 'WebhookController@define')->name('webhook.define');
 Route::get('infoWebhook', 'WebhookController@info')->name('webhook.info');
+Route::post('webhook', 'WebhookController@handle')->name('webhook.handle');

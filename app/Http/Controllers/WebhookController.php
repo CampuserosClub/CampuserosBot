@@ -6,6 +6,10 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 
 class WebhookController extends Controller
 {
+    public function handle()
+    {
+        // TODO
+    }
     public function define()
     {
         $url = 'https://api.telegram.org/bot'.env('TELEGRAM_BOT_TOKEN').'/setWebhook?url='.env('TELEGRAM_BOT_WEBHOOK');
