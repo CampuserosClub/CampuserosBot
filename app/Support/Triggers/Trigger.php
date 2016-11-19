@@ -12,6 +12,7 @@ abstract class Trigger
     protected $triggers = [];
     protected $responses = [];
     protected $stickers = [];
+    protected $gifs = [];
 
     /**
      * @var Api
@@ -75,6 +76,7 @@ abstract class Trigger
     {
         $this->handleResponses();
         $this->handleStickers();
+        $this->handleGifs();
 
         $this->run();
     }
@@ -99,6 +101,18 @@ abstract class Trigger
             $this->telegram->sendSticker([
                 'chat_id' => $this->chat->getId(),
                 'sticker' => $stickers->random(),
+            ]);
+        }
+    }
+
+    protected function handleGifs()
+    {
+        $gifs = collect($this->gifs);
+
+        if (!$gifs->isEmpty()) {
+            $this->telegram->sendDocument([
+                'chat_id' => $this->chat->getId(),
+                'document' => $gifs->random(),
             ]);
         }
     }
