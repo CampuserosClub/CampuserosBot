@@ -33,6 +33,7 @@ class WebhookController extends Controller
         \App\Support\Triggers\Grito::class,
         \App\Support\Triggers\Pizza::class,
         \App\Support\Triggers\Treta::class,
+        \App\Support\Triggers\Cafe::class,
     ];
 
     /**
