@@ -36,6 +36,7 @@ class WebhookController extends Controller
         \App\Support\Triggers\Cafe::class,
         \App\Support\Triggers\Proximo::class,
         \App\Support\Triggers\Sexta::class,
+        \App\Support\Triggers\Tonico::class,
     ];
 
     /**
