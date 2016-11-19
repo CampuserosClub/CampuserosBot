@@ -6,7 +6,6 @@ class Pizza extends Trigger
 {
     protected $triggers = [
         'pizza',
-        'xablau',
     ];
 
     protected $responses = [
