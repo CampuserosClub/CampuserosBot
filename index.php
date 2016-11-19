@@ -104,7 +104,12 @@ class CampuserosBot
         ],
         'proximo' => [
             'stickers' => [
-                'BQADAQADEAEAAm-8_wKeTmVwt36EGAI'
+                'BQADAQADEAEAAm-8_wKeTmVwt36EGAI',
+            ],
+        ],
+        'sexta' => [
+            'gifs' => [
+                'BQADAQADGAADUHrJCamTztNzkBBZAg',
             ],
         ],
         'quanto tempo falta' => 'api',
@@ -148,6 +153,9 @@ class CampuserosBot
                 if (is_array($value) AND key($value) === 'stickers') {
                     $this->sendSticker($this->rand($value['stickers']));
                 } else {
+                    if ($key($value) === 'gifs') {
+                        $this->sendDoc($this->rand($value['gifs']));
+                    }
                     if ($value === 'api') {
                         $this->sendMessage(self::callTimeTo(explode(strtoupper($key), strtoupper($text))[1]));
                     } else {
@@ -216,6 +224,12 @@ class CampuserosBot
         $this->actionTyping();
         $this->params['sticker'] = $sticker;
         $this->telegram->sendSticker($this->params);
+    }
+
+    public function sendDoc($file_id)
+    {
+        $this->params['document'] = $file_id;
+        $this->telegram->sendDocument($this->params);
     }
 
     protected function actionTyping()
