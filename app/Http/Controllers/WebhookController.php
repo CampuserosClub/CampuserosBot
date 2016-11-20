@@ -47,15 +47,25 @@ class WebhookController extends Controller
     public function __construct(Api $telegram)
     {
         $this->telegram = $telegram;
-        $this->update = $telegram->getWebhookUpdates();
-        $this->message = $this->update->getMessage();
-        $this->chat = $this->message->getChat();
+        if (!is_null($this->telegram)) {
+            $this->update = $this->telegram->getWebhookUpdates();
+
+            if (!is_null($this->update)) {
+                $this->message = $this->update->getMessage();
+
+                if (!is_null($this->message)) {
+                    $this->chat = $this->message->getChat();
+                }
+            }
+        }
     }
 
     public function handle()
     {
-        foreach ($this->triggers as $trigger) {
-            new $trigger($this->telegram);
+        if (!is_null($this->chat)) {
+            foreach ($this->triggers as $trigger) {
+                new $trigger($this->telegram);
+            }
         }
     }
 }
