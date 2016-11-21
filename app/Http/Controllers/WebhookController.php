@@ -38,6 +38,8 @@ class WebhookController extends Controller
         \App\Support\Triggers\Sexta::class,
         \App\Support\Triggers\Tonico::class,
         \App\Support\Triggers\Pombo::class,
+        \App\Support\Triggers\LinkGrupoTelegram::class,
+        \App\Support\Triggers\LinkGrupoFacebook::class,
     ];
 
     /**
