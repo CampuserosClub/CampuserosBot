@@ -7,7 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    protected $namespace = 'CampuserosBot\Units\Telegram\Http\Controllers';
+    protected $namespace = 'CampuserosBot\Unit\Telegram\Http\Controllers';
 
     public function map()
     {
