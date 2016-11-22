@@ -2,9 +2,10 @@
 
 namespace App\Support\Triggers;
 
+use app\Support\Telegram\BaseController;
 use Telegram\Bot\Api;
 
-abstract class Trigger
+abstract class Trigger extends BaseController
 {
     /**
      * @var array
@@ -14,33 +15,10 @@ abstract class Trigger
     protected $stickers = [];
     protected $gifs = [];
 
-    /**
-     * @var Api
-     */
-    protected $telegram;
-
-    /**
-     * @var \Telegram\Bot\Objects\Update
-     */
-    protected $update;
-
-    /**
-     * @var \Telegram\Bot\Objects\Message
-     */
-    protected $message;
-
-    /**
-     * @var \Telegram\Bot\Objects\Chat
-     */
-    protected $chat;
-
 
     public function __construct(Api $telegram)
     {
-        $this->telegram = $telegram;
-        $this->update = $telegram->getWebhookUpdates();
-        $this->message = $this->update->getMessage();
-        $this->chat = $this->message->getChat();
+        parent::__construct($telegram);
 
         if ($this->hasTrigger()) {
             $this->handle();
@@ -124,5 +102,6 @@ abstract class Trigger
      */
     protected function run() {
         // NOTHING
+        return null;
     }
 }
