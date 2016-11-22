@@ -1,11 +1,11 @@
 <?php
 
-namespace CampuserosBot\Support\Triggers;
+namespace CampuserosBot\Unit\Telegram\Http\Controllers\Triggers;
 
-use CampuserosBot\Support\Telegram\BaseController;
+use CampuserosBot\Core\Unit\Http\TelegramController;
 use Telegram\Bot\Api;
 
-abstract class Trigger extends BaseController
+abstract class Trigger extends TelegramController
 {
     /**
      * @var array
@@ -15,7 +15,11 @@ abstract class Trigger extends BaseController
     protected $stickers = [];
     protected $gifs = [];
 
-
+    /**
+     * Trigger constructor.
+     *
+     * @param Api $telegram
+     */
     public function __construct(Api $telegram)
     {
         parent::__construct($telegram);
@@ -55,14 +59,12 @@ abstract class Trigger extends BaseController
         $this->handleResponses();
         $this->handleStickers();
         $this->handleGifs();
-
         $this->run();
     }
 
     protected function handleResponses()
     {
         $responses = collect($this->responses);
-
         if (!$responses->isEmpty()) {
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->getId(),
@@ -74,7 +76,6 @@ abstract class Trigger extends BaseController
     protected function handleStickers()
     {
         $stickers = collect($this->stickers);
-
         if (!$stickers->isEmpty()) {
             $this->telegram->sendSticker([
                 'chat_id' => $this->chat->getId(),
@@ -86,7 +87,6 @@ abstract class Trigger extends BaseController
     protected function handleGifs()
     {
         $gifs = collect($this->gifs);
-
         if (!$gifs->isEmpty()) {
             $this->telegram->sendDocument([
                 'chat_id' => $this->chat->getId(),

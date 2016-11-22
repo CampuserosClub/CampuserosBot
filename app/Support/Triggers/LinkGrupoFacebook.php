@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Triggers;
+namespace CampuserosBot\Support\Triggers;
 
 class LinkGrupoFacebook extends Trigger
 {

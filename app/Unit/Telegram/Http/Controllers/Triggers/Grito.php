@@ -1,6 +1,6 @@
 <?php
 
-namespace CampuserosBot\Support\Triggers;
+namespace CampuserosBot\Unit\Telegram\Http\Controllers\Triggers;
 
 class Grito extends Trigger
 {
