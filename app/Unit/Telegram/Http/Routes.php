@@ -9,8 +9,11 @@ class Routes extends Router
 {
     public function routes()
     {
-        //
         $this->registerWebhookRoutes();
+
+        $this->router->get('/', function () {
+            #
+        });
     }
 
     public function registerWebhookRoutes()
