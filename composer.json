@@ -19,9 +19,6 @@
         "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
-        "classmap": [
-            "database"
-        ],
         "psr-4": {
             "CampuserosBot\\": "app/"
         }
