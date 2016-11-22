@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Support\Telegram;
+namespace CampuserosBot\Support\Telegram;
 
-use App\Http\Controllers\Controller;
+use CampuserosBot\Http\Controllers\Controller;
 use Telegram\Bot\Api;
 
 class BaseController extends Controller

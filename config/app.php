@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        CampuserosBot\Providers\AppServiceProvider::class,
+        CampuserosBot\Providers\AuthServiceProvider::class,
+        // CampuserosBot\Providers\BroadcastServiceProvider::class,
+        CampuserosBot\Providers\EventServiceProvider::class,
+        CampuserosBot\Providers\RouteServiceProvider::class,
 
     ],
 

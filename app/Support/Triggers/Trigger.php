@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Support\Triggers;
+namespace CampuserosBot\Support\Triggers;
 
-use app\Support\Telegram\BaseController;
+use CampuserosBot\Support\Telegram\BaseController;
 use Telegram\Bot\Api;
 
 abstract class Trigger extends BaseController

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace CampuserosBot\Http\Controllers\Auth;
 
-use App\User;
+use CampuserosBot\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use CampuserosBot\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller

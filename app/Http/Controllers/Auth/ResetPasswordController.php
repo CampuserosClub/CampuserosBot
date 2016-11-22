@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace CampuserosBot\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use CampuserosBot\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

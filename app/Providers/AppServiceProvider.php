@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace CampuserosBot\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

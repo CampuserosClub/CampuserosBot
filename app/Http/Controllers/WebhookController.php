@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CampuserosBot\Http\Controllers;
 
-use App\Support\Telegram\BaseController as Telegram;
+use CampuserosBot\Support\Telegram\BaseController as Telegram;
 
 class WebhookController extends Telegram
 {
@@ -10,16 +10,16 @@ class WebhookController extends Telegram
      * @var array
      */
     protected $triggers = [
-        \App\Support\Triggers\Grito::class,
-        \App\Support\Triggers\Pizza::class,
-        \App\Support\Triggers\Treta::class,
-        \App\Support\Triggers\Cafe::class,
-        \App\Support\Triggers\Proximo::class,
-        \App\Support\Triggers\Sexta::class,
-        \App\Support\Triggers\Tonico::class,
-        \App\Support\Triggers\Pombo::class,
-        \App\Support\Triggers\LinkGrupoTelegram::class,
-        \App\Support\Triggers\LinkGrupoFacebook::class,
+        \CampuserosBot\Support\Triggers\Grito::class,
+        \CampuserosBot\Support\Triggers\Pizza::class,
+        \CampuserosBot\Support\Triggers\Treta::class,
+        \CampuserosBot\Support\Triggers\Cafe::class,
+        \CampuserosBot\Support\Triggers\Proximo::class,
+        \CampuserosBot\Support\Triggers\Sexta::class,
+        \CampuserosBot\Support\Triggers\Tonico::class,
+        \CampuserosBot\Support\Triggers\Pombo::class,
+        \CampuserosBot\Support\Triggers\LinkGrupoTelegram::class,
+        \CampuserosBot\Support\Triggers\LinkGrupoFacebook::class,
     ];
 
     public function handle()

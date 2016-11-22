@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Triggers;
+namespace CampuserosBot\Support\Triggers;
 
 class LinkGrupoTelegram extends Trigger
 {
