@@ -19,6 +19,7 @@ class TelegramController extends Telegram
         \CampuserosBot\Unit\Telegram\Http\Controllers\Triggers\BiscoitoBolacha::class,
         \CampuserosBot\Unit\Telegram\Http\Controllers\Triggers\Countdown::class,
         \CampuserosBot\Unit\Telegram\Http\Controllers\Triggers\Thegame::class,
+        \CampuserosBot\Unit\Telegram\Http\Controllers\Triggers\Regrasthegame::class,
     ];
 
     public function webhook()
