@@ -8,10 +8,10 @@ class Pombo extends Trigger
         'pru',
     ];
 
-    protected $stickers = [
-        'BQADAQADBQADMydgDOK9RRvb-TTSAg',
-        'BQADAQADCwADMydgDEiyD6htHwbYAg',
-        'BQADAQADLgADMydgDBQxRNPfJ-TJAg',
-        'BQADAQADMAADMydgDI7Zj-WajTwlAg',
+    protected $returns = [
+        ['type' => 1, 'return' => 'BQADAQADBQADMydgDOK9RRvb-TTSAg'],
+        ['type' => 1, 'return' => 'BQADAQADCwADMydgDEiyD6htHwbYAg'],
+        ['type' => 1, 'return' => 'BQADAQADLgADMydgDBQxRNPfJ-TJAg'],
+        ['type' => 1, 'return' => 'BQADAQADMAADMydgDI7Zj-WajTwlAg'],
     ];
 }

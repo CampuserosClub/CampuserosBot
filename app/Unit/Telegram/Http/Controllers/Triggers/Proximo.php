@@ -9,7 +9,7 @@ class Proximo extends Trigger
         'próximo',
     ];
 
-    protected $stickers = [
-        'BQADAQADEAEAAm-8_wKeTmVwt36EGAI',
+    protected $returns = [
+        ['type' => 1, 'return' => 'BQADAQADEAEAAm-8_wKeTmVwt36EGAI'],
     ];
 }

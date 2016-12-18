@@ -8,7 +8,7 @@ class Sexta extends Trigger
         'sexta',
     ];
 
-    protected $gifs = [
-        'http://i.giphy.com/5uLOzZipGuz3G.gif',
+    protected $returns = [
+        ['type' => 2, 'return' => 'http://i.giphy.com/5uLOzZipGuz3G.gif'],
     ];
 }

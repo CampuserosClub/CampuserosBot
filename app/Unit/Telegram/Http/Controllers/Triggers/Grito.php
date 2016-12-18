@@ -15,4 +15,12 @@ class Grito extends Trigger
         'OooOOOOOOOoooo',
         'OoooOoooOoOOO',
     ];
+
+    protected $returns = [
+        ['type' => 0, 'return' => 'OooOOOOOOOoooOoooooo'],
+        ['type' => 0, 'return' => 'ooooooOOOOOoooOOOOooooo'],
+        ['type' => 0, 'return' => 'oooooooOOOOOOOOoooooO'],
+        ['type' => 0, 'return' => 'OooOOOOOOOoooo'],
+        ['type' => 0, 'return' => 'OoooOoooOoOOO'],
+    ];
 }
