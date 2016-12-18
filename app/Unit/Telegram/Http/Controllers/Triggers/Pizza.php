@@ -13,4 +13,8 @@ class Pizza extends Trigger
         'PIZZAAAAAAA',
         'Pizzaaaaaaaaaaaaaaaaaaa!!!',
     ];
+
+    protected $gifs = [
+        'http://i.giphy.com/3o6ZtdOqypaPwQ5nMI.gif',
+    ];
 }
