@@ -74,11 +74,11 @@ abstract class Trigger extends TelegramController
             break;
           case 1:
             # Sticker
-            $this->handleStickers($return["return"]);
+            $this->handleSticker($return["return"]);
             break;
           default:
             # If is not 0 and 1: is 2 - GIF
-            $this->handleGifs($return["return"]);
+            $this->handleGif($return["return"]);
             break;
         }
         $this->run();
