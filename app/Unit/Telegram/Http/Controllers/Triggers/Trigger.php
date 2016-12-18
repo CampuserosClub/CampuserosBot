@@ -14,7 +14,17 @@ abstract class Trigger extends TelegramController
     protected $responses = [];
     protected $stickers = [];
     protected $gifs = [];
-
+    /**
+     * All of responses.
+     * [type, param]
+     * Type codes:
+     * 0 - text
+     * 1 - sticker
+     * 2 - gif
+     *
+     * @var array
+     */
+    protected $returns = [];
     /**
      * Trigger constructor.
      *
