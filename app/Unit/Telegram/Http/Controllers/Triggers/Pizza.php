@@ -13,4 +13,11 @@ class Pizza extends Trigger
         'PIZZAAAAAAA',
         'Pizzaaaaaaaaaaaaaaaaaaa!!!',
     ];
+
+    protected $returns = [
+        ['type' => 0, 'return' => 'Pizzaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
+        ['type' => 0, 'return' => 'PIZZAAAAAAA'],
+        ['type' => 0, 'return' => 'Pizzaaaaaaaaaaaaaaaaaaa!!!'],
+        ['type' => 2, 'return' => 'http://i.giphy.com/3o6ZtdOqypaPwQ5nMI.gif'],
+    ];
 }
