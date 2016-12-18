@@ -8,12 +8,6 @@ class Pizza extends Trigger
         'pizza',
     ];
 
-    protected $responses = [
-        'Pizzaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        'PIZZAAAAAAA',
-        'Pizzaaaaaaaaaaaaaaaaaaa!!!',
-    ];
-
     protected $returns = [
         ['type' => 0, 'return' => 'Pizzaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
         ['type' => 0, 'return' => 'PIZZAAAAAAA'],

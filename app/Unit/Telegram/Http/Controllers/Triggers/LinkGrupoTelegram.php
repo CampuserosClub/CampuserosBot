@@ -8,7 +8,7 @@ class LinkGrupoTelegram extends Trigger
         '/linkgrupotelegram',
     ];
 
-    protected $responses = [
-        'Ooopa! Aqui está: https://telegram.me/CampuserosClub',
+    protected $returns = [
+        ['type' => 0, 'return' => 'Ooopa! Aqui está: https://telegram.me/CampuserosClub'],
     ];
 }

@@ -8,7 +8,7 @@ class LinkGrupoFacebook extends Trigger
         '/linkgrupofacebook',
     ];
 
-    protected $responses = [
-        'Voilà! https://www.facebook.com/groups/campuserosinternationalclub/',
+    protected $returns = [
+        ['type' => 0, 'return' => 'Voilà! https://www.facebook.com/groups/campuserosinternationalclub/'],
     ];
 }
