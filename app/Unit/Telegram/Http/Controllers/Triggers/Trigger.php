@@ -66,20 +66,22 @@ abstract class Trigger extends TelegramController
 
     protected function handle()
     {
-        $return = collect($this->returns)->random();
-        switch ($return["type"]) {
-          case 0:
-            # Text
-            $this->handleResponse($return["return"]);
-            break;
-          case 1:
-            # Sticker
-            $this->handleSticker($return["return"]);
-            break;
-          default:
-            # If is not 0 and 1: is 2 - GIF
-            $this->handleGif($return["return"]);
-            break;
+        if(count($this->returns) > 0){
+          $return = collect($this->returns)->random();
+          switch ($return["type"]) {
+            case 0:
+              # Text
+              $this->handleResponse($return["return"]);
+              break;
+            case 1:
+              # Sticker
+              $this->handleSticker($return["return"]);
+              break;
+            default:
+              # If is not 0 and 1: is 2 - GIF
+              $this->handleGif($return["return"]);
+              break;
+          }
         }
         $this->run();
     }
