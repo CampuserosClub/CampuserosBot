@@ -8,8 +8,8 @@ class Tonico extends Trigger
         'tonico',
         'help',
     ];
-
-    protected $gifs = [
-        'https://i.giphy.com/srgUMnkzt4esM.gif',
+    
+    protected $returns = [
+        ['type' => 2, 'return' => 'http://i.giphy.com/srgUMnkzt4esM.gif'],
     ];
 }

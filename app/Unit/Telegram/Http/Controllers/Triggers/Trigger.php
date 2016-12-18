@@ -14,7 +14,17 @@ abstract class Trigger extends TelegramController
     protected $responses = [];
     protected $stickers = [];
     protected $gifs = [];
-
+    /**
+     * All of responses.
+     * [type, return]
+     * Type codes:
+     * 0 - text
+     * 1 - sticker
+     * 2 - gif
+     *
+     * @var array
+     */
+    protected $returns = [];
     /**
      * Trigger constructor.
      *
@@ -56,9 +66,23 @@ abstract class Trigger extends TelegramController
 
     protected function handle()
     {
-        $this->handleResponses();
-        $this->handleStickers();
-        $this->handleGifs();
+        if(count($this->returns) > 0){
+          $return = collect($this->returns)->random();
+          switch ($return["type"]) {
+            case 0:
+              # Text
+              $this->handleResponse($return["return"]);
+              break;
+            case 1:
+              # Sticker
+              $this->handleSticker($return["return"]);
+              break;
+            default:
+              # If is not 0 and 1: is 2 - GIF
+              $this->handleGif($return["return"]);
+              break;
+          }
+        }
         $this->run();
     }
 
@@ -93,6 +117,35 @@ abstract class Trigger extends TelegramController
                 'document' => $gifs->random(),
             ]);
         }
+    }
+
+
+  /**
+   * Returns for after the refactor did in 18/12/2016
+   *
+   */
+    protected function handleResponse($response)
+    {
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat->getId(),
+            'text' => $response,
+        ]);
+    }
+
+    protected function handleSticker($response)
+    {
+        $this->telegram->sendSticker([
+            'chat_id' => $this->chat->getId(),
+            'sticker' => $response,
+        ]);
+    }
+
+    protected function handleGif($response)
+    {
+        $this->telegram->sendDocument([
+            'chat_id' => $this->chat->getId(),
+            'document' => $response,
+        ]);
     }
 
     /**
