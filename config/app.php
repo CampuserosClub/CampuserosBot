@@ -166,17 +166,17 @@ return [
         /*
          * Package Service Providers...
          */
-        Telegram\Bot\Laravel\TelegramServiceProvider::class,
 
-        /*
-         * Domains Service Providers...
-         */
         //
 
         /*
-         * Units Service Providers...
+         * Application Service Providers...
          */
-        CampuserosBot\Unit\Telegram\Providers\UnitServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 
