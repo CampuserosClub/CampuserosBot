@@ -19,9 +19,17 @@ class WebhookController extends TelegramController
     public function handle()
     {
         if (!is_null($this->chat)) {
-            foreach ($this->triggers as $trigger) {
-                new $trigger($this->telegram);
-            }
+            $doc = $this->message->getDocument();
+            $doc_id = $doc->getFileId();
+
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chat->getId(),
+                'text' => (string) $doc_id,
+            ]);
+
+//            foreach ($this->triggers as $trigger) {
+//                new $trigger($this->telegram);
+//            }
         }
     }
 }
