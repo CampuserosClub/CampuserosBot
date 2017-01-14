@@ -6,5 +6,8 @@ class Sexta extends TriggerController
 {
     protected $triggers = ['sexta'];
 
-    protected $gifs = ['https://i.giphy.com/5uLOzZipGuz3G.gif'];
+    protected $gifs = [
+        'BQADBAADjCEAAtUXZAfiwPcBb3_Q0gI', // party hard girafa
+        'BQADAQADDAEAAnOkGANFvZFaSCP3SgI', // party hard gandalf
+    ];
 }
