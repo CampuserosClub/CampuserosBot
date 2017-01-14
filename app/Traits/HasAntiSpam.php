@@ -31,8 +31,10 @@ trait HasAntiSpam
 
             if ($user->messages >= 5) {
                 $user->blocked = true;
-                $times_blocked = $user->times_blocked++;
+                $user->times_blocked++;
                 $user->save();
+
+                $times_blocked = $user->times_blocked;
 
                 $minutes_blocked = $this->minutes_blocked * $times_blocked;
 
