@@ -36,7 +36,7 @@ trait HasAntiSpam
 
                 $times_blocked = $user->times_blocked;
 
-                $minutes_blocked = $this->minutes_blocked * $times_blocked;
+                $minutes_blocked = $this->minutes_blocked * $times_blocked * $times_blocked;
 
                 $blockedUntil = $user->last_message->copy()->addMinutes($minutes_blocked);
                 $text = "PARABÉNS! Você foi bloqueado pela ".$times_blocked."ª vez.\nVou te ignorar até:". $blockedUntil->format('d/m/Y H:i:s');
@@ -54,7 +54,7 @@ trait HasAntiSpam
         } else {
             $now = \Carbon\Carbon::now();
             $times_blocked = $user->times_blocked;
-            $minutes_blocked = $this->minutes_blocked * $times_blocked;
+            $minutes_blocked = $this->minutes_blocked * $times_blocked * $times_blocked;
             $blockedUntil = $user->last_message->copy()->addMinutes($minutes_blocked);
             $diff = $now->diffInSeconds($blockedUntil, false);
 
