@@ -39,7 +39,7 @@ trait HasAntiSpam
                 $minutes_blocked = $this->minutes_blocked * $times_blocked;
 
                 $blockedUntil = $user->last_message->copy()->addMinutes($minutes_blocked);
-                $text = "PARABÉNS! Você foi bloqueado.\nVou te ignorar até:". $blockedUntil->format('d/m/Y H:i:s');
+                $text = "PARABÉNS! Você foi bloqueado pela ".$times_blocked."ª vez.\nVou te ignorar até:". $blockedUntil->format('d/m/Y H:i:s');
 
                 $telegram->sendMessage([
                     'chat_id' => $message->getChat()->getId(),
