@@ -6,5 +6,12 @@ class Tonico extends TriggerController
 {
     protected $triggers = ['tonico', 'help'];
 
-    protected $gifs = ['BQADAQADCgEAAnOkGAN02gwNM58Z3AI'];
+    protected $gifs = [
+        'production' => [
+            'BQADAQADDwEAAnOkGAOIa_CTv1FOggI'
+        ],
+        'local' => [
+            'BQADAQADCgEAAnOkGAN02gwNM58Z3AI',
+        ],
+    ];
 }

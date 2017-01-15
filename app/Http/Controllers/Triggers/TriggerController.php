@@ -80,7 +80,8 @@ abstract class TriggerController extends TelegramController
 
     protected function handleGifs()
     {
-        $gifs = collect($this->gifs);
+        $from = env('APP_ENV') == 'production' ? 'production' : 'local';
+        $gifs = collect(array_get($this->gifs, $from));
 
         if (!$gifs->isEmpty()) {
             $this->telegram->sendDocument([
