@@ -8,6 +8,6 @@ class Sexta extends TriggerController
 
     protected $gifs = [
         'BQADBAADjCEAAtUXZAfiwPcBb3_Q0gI', // party hard girafa
-        'BQADAQADDAEAAnOkGANFvZFaSCP3SgI', // party hard gandalf
+//        'BQADAQADDAEAAnOkGANFvZFaSCP3SgI', // party hard gandalf
     ];
 }
