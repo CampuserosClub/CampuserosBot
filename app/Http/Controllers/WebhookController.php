@@ -12,6 +12,7 @@ class WebhookController extends TelegramController
         \App\Http\Controllers\Triggers\About::class,
         \App\Http\Controllers\Triggers\BiscoitoBolacha::class,
         \App\Http\Controllers\Triggers\Cafe::class,
+        \App\Http\Controllers\Triggers\Gas::class,
         \App\Http\Controllers\Triggers\Grito::class,
         \App\Http\Controllers\Triggers\Pizza::class,
         \App\Http\Controllers\Triggers\Pombo::class,
