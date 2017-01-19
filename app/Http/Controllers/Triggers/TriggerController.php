@@ -4,22 +4,18 @@ namespace App\Http\Controllers\Triggers;
 
 use App\Traits\HasAntiSpam;
 use App\Http\Controllers\TelegramController;
+use App\Traits\TelegramHelpers;
 use Telegram\Bot\Api;
 
 abstract class TriggerController extends TelegramController
 {
-    use HasAntiSpam;
+    use HasAntiSpam, TelegramHelpers;
 
     protected $triggers = [];
     protected $texts = [];
     protected $stickers = [];
     protected $gifs = [];
-
-    protected $responses = [
-        'text' => false,
-        'sticker' => false,
-        'gif' => false,
-    ];
+    protected $voices = [];
 
     public function __construct(Api $telegram)
     {
@@ -51,6 +47,7 @@ abstract class TriggerController extends TelegramController
         $this->handleTexts();
         $this->handleStickers();
         $this->handleGifs();
+        $this->handleVoices();
         $this->run();
     }
 
@@ -87,6 +84,21 @@ abstract class TriggerController extends TelegramController
             $this->telegram->sendDocument([
                 'chat_id' => $this->chat->getId(),
                 'document' => $gifs->random(),
+            ]);
+        }
+    }
+
+    protected function handleVoices()
+    {
+        $voices = collect($this->voices);
+
+        if (!$voices->isEmpty()) {
+            $resource = 'assets/telegram/' . $voices->random();
+            $voice = resource_path($resource);
+
+            $this->telegram->sendVoice([
+                'chat_id' => $this->chat->getId(),
+                'voice' => $voice,
             ]);
         }
     }
