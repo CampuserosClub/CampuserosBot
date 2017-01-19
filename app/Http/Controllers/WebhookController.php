@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\TelegramHelpers;
+
 class WebhookController extends TelegramController
 {
+    use TelegramHelpers;
+
     protected $triggers = [
         \App\Http\Controllers\Triggers\About::class,
         \App\Http\Controllers\Triggers\BiscoitoBolacha::class,
@@ -19,14 +23,6 @@ class WebhookController extends TelegramController
     public function handle()
     {
         if (!is_null($this->chat)) {
-//            $doc = $this->message->getDocument();
-//            $doc_id = $doc->getFileId();
-//
-//            $this->telegram->sendMessage([
-//                'chat_id' => $this->chat->getId(),
-//                'text' => (string) $doc_id,
-//            ]);
-
             foreach ($this->triggers as $trigger) {
                 new $trigger($this->telegram);
             }
