@@ -14,7 +14,10 @@ class AddNameOnTelegramUsersTable extends Migration
     public function up()
     {
         Schema::table('telegram_users', function (Blueprint $table) {
-            $table->string('name')->after('user_id');
+            $table->string('name')
+                ->nullable()
+                ->default(null)
+                ->after('user_id');
         });
     }
 
