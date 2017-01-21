@@ -25,6 +25,7 @@ trait HasAntiSpam
 
         if (!$user->blocked) {
             $user->last_message = $message_date;
+            $user->name = $message->getFrom()->getFirstName() . ' ' . $message->getFrom()->getLastName();
             $user->messages++;
             $user->save();
 
