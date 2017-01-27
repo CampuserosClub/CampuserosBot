@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Telegram\Bot\Api;
-
 class TelegramController extends Controller
 {
     protected $telegram;
@@ -11,7 +9,7 @@ class TelegramController extends Controller
     protected $message;
     protected $chat;
 
-    public function __construct(Api $telegram)
+    public function __construct(TelegramAPI $telegram)
     {
         $this->telegram = $telegram;
 
