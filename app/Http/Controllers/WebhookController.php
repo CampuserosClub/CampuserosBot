@@ -19,7 +19,7 @@ class WebhookController extends TelegramController
         \App\Http\Controllers\Triggers\Proximo::class,
         \App\Http\Controllers\Triggers\Sexta::class,
         \App\Http\Controllers\Triggers\Tonico::class,
-        \App\Http\Controllers\Triggers\VoteBan::class,
+//        \App\Http\Controllers\Triggers\VoteBan::class,
     ];
 
     public function handle()
