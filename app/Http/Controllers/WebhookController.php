@@ -27,10 +27,19 @@ class WebhookController extends TelegramController
     {
         switch ($this->update->detectType()) {
             case 'message':
-                $this->triggers();
+                $this->messages();
                 break;
             case 'callback_query':
                 $this->callbacks();
+                break;
+        }
+    }
+
+    protected function messages()
+    {
+        switch ($this->message->detectType()) {
+            case 'text':
+                $this->triggers();
                 break;
         }
     }
@@ -44,6 +53,6 @@ class WebhookController extends TelegramController
 
     protected function callbacks()
     {
-        \Log::info($this->update->callbackQuery->data);
+        \Log::info($this->update->callbackQuery);
     }
 }
