@@ -6,7 +6,7 @@ use Telegram\Bot\Keyboard\Keyboard;
 
 class Resumo extends TriggerController
 {
-    protected $triggers = ['/resumo', '/start resumo:parcial'];
+    protected $triggers = ['/resumo', '/start resumo:parcial', '/res'];
 
     protected function run()
     {
@@ -34,7 +34,7 @@ class Resumo extends TriggerController
             } else {
 
                 if (str_is($this->chat->username, 'CampuserosClub')) {
-                    $text = collect(explode('/resumo', $text))->last();
+                    $text = collect(explode('/res', $text))->last();
                     $text = str_replace(' {escreva aqui}', '', $text);
 
                     if (!empty($text)) {
@@ -46,6 +46,11 @@ class Resumo extends TriggerController
                         ]);
                     }
 
+                } else {
+                    $this->telegram->sendMessage([
+                        'chat_id' => $this->chat->id,
+                        'text' => 'Esse comando só pode ser usado no grupo @CampuserosClub'
+                    ]);
                 }
 
             }
@@ -58,7 +63,7 @@ class Resumo extends TriggerController
         $keyboard = [
             Keyboard::inlineButton([
                 'text' => 'Resumir',
-                'switch_inline_query_current_chat' => '/resumo {escreva aqui}'
+                'switch_inline_query_current_chat' => '/res {escreva aqui}'
             ]),
             Keyboard::inlineButton([
                 'text' => 'Ver o resumo parcial de hoje',
