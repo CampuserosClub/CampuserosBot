@@ -15,7 +15,7 @@ class BiscoitoBolacha extends TriggerController
         $response .= $this->checkText($text, $responses->first()) ? $responses->last() : $responses->first();
 
         $this->telegram->sendMessage([
-            'chat_id' => $this->chat->getId(),
+            'chat_id' => $this->chat->id,
             'text' => $response,
         ]);
     }

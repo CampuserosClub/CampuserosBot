@@ -28,7 +28,7 @@ class VoteBan extends TriggerController
                 $votes = \App\VoteBan::all()->count();
 
                 $this->telegram->sendMessage([
-                    'chat_id' => $this->chat->getId(),
+                    'chat_id' => $this->chat->id,
                     'text' => (string) 'BAN ('.$ban_name.') : ' . $votes . '/10',
                 ]);
             }
@@ -43,7 +43,7 @@ class VoteBan extends TriggerController
             ]);
 
             $this->telegram->sendMessage([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'text' => (string) $ban_name . ' foi banido com sucesso. Assim como o ban, vocês são 10/10 <3',
             ]);
         }

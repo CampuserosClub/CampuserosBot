@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Triggers;
 
-use App\Http\Controllers\TelegramAPI;
 use App\Traits\HasAntiSpam;
 use App\Http\Controllers\TelegramController;
 use App\Traits\TelegramHelpers;
+use Telegram\Bot\Api;
 
 abstract class TriggerController extends TelegramController
 {
@@ -16,8 +16,9 @@ abstract class TriggerController extends TelegramController
     protected $stickers = [];
     protected $gifs = [];
     protected $voices = [];
+    protected $callbacks = [];
 
-    public function __construct(TelegramAPI $telegram)
+    public function __construct(Api $telegram)
     {
         parent::__construct($telegram);
 
@@ -30,7 +31,7 @@ abstract class TriggerController extends TelegramController
 
     protected function hasTrigger()
     {
-        if (!is_null($message = $this->message->getText())) {
+        if (!is_null($message = $this->message->text)) {
             return $this->checkText($message, $this->triggers);
         }
 
@@ -57,7 +58,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$texts->isEmpty()) {
             $this->telegram->sendMessage([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'text' => $texts->random(),
             ]);
         }
@@ -69,7 +70,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$stickers->isEmpty()) {
             $this->telegram->sendSticker([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'sticker' => $stickers->random(),
             ]);
         }
@@ -82,7 +83,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$gifs->isEmpty()) {
             $this->telegram->sendDocument([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'document' => $gifs->random(),
             ]);
         }
@@ -97,7 +98,7 @@ abstract class TriggerController extends TelegramController
             $voice = resource_path($resource);
 
             $this->telegram->sendVoice([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'voice' => $voice,
             ]);
         }
