@@ -32,8 +32,9 @@ class Resumo extends TriggerController
                 ]);
 
             } else {
-
-                if (str_is($this->chat->username, 'CampuserosClub')) {
+                $campuserosclub = str_is($this->chat->username, 'CampuserosClub');
+                $beta = str_is($this->chat->username, 'jaoNoctus');
+                if ($campuserosclub or $beta) {
                     $text = collect(explode('/res', $text))->last();
                     $text = str_replace(' {escreva aqui}', '', $text);
                     $text = str_replace('{', '', $text);
