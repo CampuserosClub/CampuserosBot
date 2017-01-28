@@ -14,7 +14,7 @@ class About extends TriggerController
         $text .= "*GitHub* [fork me](https://github.com/CampuserosClub/CampuserosBot)";
 
         $this->telegram->sendMessage([
-            'chat_id' => $this->chat->getId(),
+            'chat_id' => $this->chat->id,
             'text' => $text,
             'parse_mode' => 'markdown',
             'disable_web_page_preview' => true,

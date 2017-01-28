@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Triggers;
 
+use Telegram\Bot\Keyboard\Keyboard;
+
 class Resumo extends TriggerController
 {
     protected $triggers = ['/resumo'];
@@ -13,21 +15,18 @@ class Resumo extends TriggerController
 
     protected function showOptions()
     {
+
         $keyboard = [
-            [
-                'text' => 'Resumir',
-                'callback_data' => 'a',
-            ],
-            [
-                'text' => 'Ver o resumo',
-                'callback_data' => 'b',
-            ],
+            Keyboard::inlineButton(['text' => 'Resumir', 'callback_data' => 'resumo:1']),
+            Keyboard::inlineButton(['text' => 'Ver o resumo', 'callback_data' => 'resumo:2']),
         ];
 
-        $markup = $this->telegram->inlineKeyboardMarkup($keyboard);
+        $markup = Keyboard::make([
+            'inline_keyboard' => [$keyboard]
+        ]);
 
-        $message = $this->telegram->sendMessage([
-            'chat_id' => $this->chat->getId(),
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat->id,
             'text' => 'O que você deseja fazer?',
             'reply_markup' => $markup,
         ]);

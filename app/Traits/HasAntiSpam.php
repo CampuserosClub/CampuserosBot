@@ -13,19 +13,19 @@ trait HasAntiSpam
 
     protected function userCanUse(Api $telegram)
     {
-        $message = $telegram->getWebhookUpdates()->getMessage();
+        $message = $telegram->getWebhookUpdate()->getMessage();
 
         $this->cleanLog();
 
-        $user_id = $message->getFrom()->getId();
-        $message_timestamp = $message->getDate();
+        $user_id = $message->from->id;
+        $message_timestamp = $message->date;
         $message_date = Carbon::createFromTimestamp($message_timestamp);
 
         $user = TelegramUser::firstOrCreate(['user_id' => $user_id]);
 
         if (!$user->blocked) {
             $user->last_message = $message_date;
-            $user->name = $message->getFrom()->getFirstName() . ' ' . $message->getFrom()->getLastName();
+            $user->name = $message->from->firstName . ' ' . $message->from->lastName;
             $user->messages++;
             $user->save();
 
@@ -43,9 +43,9 @@ trait HasAntiSpam
                 $text = "PARABÉNS! Você foi bloqueado pela ".$times_blocked."ª vez.\nVou te ignorar até:". $blockedUntil->format('d/m/Y H:i:s');
 
                 $telegram->sendMessage([
-                    'chat_id' => $message->getChat()->getId(),
+                    'chat_id' => $message->chat->id,
                     'text' => $text,
-                    'reply_to_message_id' => $message->getMessageId(),
+                    'reply_to_message_id' => $message->messageId,
                 ]);
 
                 return false;

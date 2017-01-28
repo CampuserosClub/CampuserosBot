@@ -31,7 +31,7 @@ abstract class TriggerController extends TelegramController
 
     protected function hasTrigger()
     {
-        if (!is_null($message = $this->message->getText())) {
+        if (!is_null($message = $this->message->text)) {
             return $this->checkText($message, $this->triggers);
         }
 
@@ -58,7 +58,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$texts->isEmpty()) {
             $this->telegram->sendMessage([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'text' => $texts->random(),
             ]);
         }
@@ -70,7 +70,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$stickers->isEmpty()) {
             $this->telegram->sendSticker([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'sticker' => $stickers->random(),
             ]);
         }
@@ -83,7 +83,7 @@ abstract class TriggerController extends TelegramController
 
         if (!$gifs->isEmpty()) {
             $this->telegram->sendDocument([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'document' => $gifs->random(),
             ]);
         }
@@ -98,7 +98,7 @@ abstract class TriggerController extends TelegramController
             $voice = resource_path($resource);
 
             $this->telegram->sendVoice([
-                'chat_id' => $this->chat->getId(),
+                'chat_id' => $this->chat->id,
                 'voice' => $voice,
             ]);
         }

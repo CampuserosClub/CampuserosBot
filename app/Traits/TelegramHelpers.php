@@ -8,11 +8,11 @@ trait TelegramHelpers
 {
     protected function getDocumentId(Api $telegram, $chat_id = null)
     {
-        $updates = $telegram->getWebhookUpdates();
-        $message = $updates->getMessage();
-        $chat = $message->getChat();
-        $document = $message->getDocument();
-        $file_id = $document->getFileId();
+        $updates = $telegram->getWebhookUpdate();
+        $message = $updates->message;
+        $chat = $message->chat;
+        $document = $message->document;
+        $file_id = $document->fileId;
 
         $chat_id = is_null($chat_id) ? $chat->getId() : $chat_id;
 
