@@ -25,14 +25,14 @@ class WebhookController extends TelegramController
 
     public function handle()
     {
-        switch ($this->update->detectType()) {
-            case 'message':
-                $this->messages();
-                break;
-            case 'callback_query':
-                $this->callbacks();
-                break;
-        }
+//        switch ($this->update->detectType()) {
+//            case 'message':
+//                $this->messages();
+//                break;
+//            case 'callback_query':
+//                $this->callbacks();
+//                break;
+//        }
     }
 
     protected function messages()
