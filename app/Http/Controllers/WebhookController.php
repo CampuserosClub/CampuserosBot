@@ -25,7 +25,7 @@ class WebhookController extends TelegramController
 
     public function handle()
     {
-        if (!is_null($this->chat) or !is_null($this->callback)) {
+        if (!is_null($this->chat)) {
             foreach ($this->triggers as $trigger) {
                 new $trigger($this->telegram);
             }

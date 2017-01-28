@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Telegram\Api;
+use Telegram\Bot\Api;
 
 class TelegramController extends Controller
 {
@@ -10,22 +10,18 @@ class TelegramController extends Controller
     protected $update;
     protected $message;
     protected $chat;
-    protected $callback;
+    protected $callbacks;
 
     public function __construct(Api $telegram)
     {
         $this->telegram = $telegram;
 
         if (!is_null($this->telegram)) {
-            $this->update = $this->telegram->getWebhookUpdates();
+            $this->update = $this->telegram->getWebhookUpdate();
 
             if (!is_null($this->update)) {
-                $this->telegram->callback($this->update);
                 $this->message = $this->update->getMessage();
-
-                if (!is_null($this->message)) {
-                    $this->chat = $this->message->getChat();
-                }
+                $this->chat = $this->update->getChat();
             }
         }
     }
