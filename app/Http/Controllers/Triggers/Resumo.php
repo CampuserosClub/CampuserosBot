@@ -6,7 +6,7 @@ use Telegram\Bot\Keyboard\Keyboard;
 
 class Resumo extends TriggerController
 {
-    protected $triggers = ['/resumo', '/start resumo:parcial'];
+    protected $triggers = ['/resumo', '/start resumo:parcial', '/res'];
 
     protected function run()
     {
@@ -16,26 +16,21 @@ class Resumo extends TriggerController
             $this->showOptions();
         } else {
             if (str_is('/start resumo:parcial', $text)) {
-                $resumos = \App\Resumo::today()->get();
-
-                $txt = "#RESUMO (parcial) *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
-
-                foreach ($resumos as $resumo) {
-                    $hour = $resumo->created_at->format('H:i');
-                    $txt .= "*[ $hour ]* " . $resumo->text . "\n";
-                }
 
                 $this->telegram->sendMessage([
                     'chat_id' => $this->chat->id,
-                    'text' => $txt,
+                    'text' => $this->resumoToday(),
                     'parse_mode' => 'markdown'
                 ]);
 
             } else {
-
-                if (str_is($this->chat->username, 'CampuserosClub')) {
-                    $text = collect(explode('/resumo', $text))->last();
+                $campuserosclub = str_is($this->chat->username, 'CampuserosClub');
+                $beta = str_is($this->chat->username, 'jaoNoctus');
+                if ($campuserosclub or $beta) {
+                    $text = collect(explode('/res', $text))->last();
                     $text = str_replace(' {escreva aqui}', '', $text);
+                    $text = str_replace('{', '', $text);
+                    $text = str_replace('}', '', $text);
 
                     if (!empty($text)) {
                         $by = $this->message->from->id;
@@ -44,12 +39,36 @@ class Resumo extends TriggerController
                             'text' => $text,
                             'by' => $by,
                         ]);
+
+                        $this->telegram->sendMessage([
+                            'chat_id' => $this->chat->id,
+                            'text' => 'Anotado ;)',
+                        ]);
                     }
 
+                } else {
+                    $this->telegram->sendMessage([
+                        'chat_id' => $this->chat->id,
+                        'text' => 'Esse comando só pode ser usado no grupo @CampuserosClub',
+                    ]);
                 }
 
             }
         }
+    }
+
+    protected function resumoToday()
+    {
+        $resumos = \App\Resumo::today()->get();
+
+        $txt = "#RESUMO (parcial) *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
+
+        foreach ($resumos as $resumo) {
+            $hour = $resumo->created_at->format('H:i');
+            $txt .= "*[ $hour ]* " . $resumo->text . "\n";
+        }
+
+        return $txt;
     }
 
     protected function showOptions()
@@ -58,7 +77,7 @@ class Resumo extends TriggerController
         $keyboard = [
             Keyboard::inlineButton([
                 'text' => 'Resumir',
-                'switch_inline_query_current_chat' => '/resumo {escreva aqui}'
+                'switch_inline_query_current_chat' => '/res {escreva aqui}'
             ]),
             Keyboard::inlineButton([
                 'text' => 'Ver o resumo parcial de hoje',
@@ -72,7 +91,8 @@ class Resumo extends TriggerController
 
         $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => "O que você deseja fazer?",
+            'text' => "*O que você deseja fazer?*\n\n_para resumir, use:_\n`/res` `{escreva aqui}`",
+            'parse_mode' => 'markdown',
             'reply_markup' => $markup,
         ]);
     }
