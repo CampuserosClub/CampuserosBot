@@ -44,12 +44,17 @@ class Resumo extends TriggerController
                             'text' => $text,
                             'by' => $by,
                         ]);
+
+                        $this->telegram->sendMessage([
+                            'chat_id' => $this->chat->id,
+                            'text' => 'Anotado ;)',
+                        ]);
                     }
 
                 } else {
                     $this->telegram->sendMessage([
                         'chat_id' => $this->chat->id,
-                        'text' => 'Esse comando só pode ser usado no grupo @CampuserosClub'
+                        'text' => 'Esse comando só pode ser usado no grupo @CampuserosClub',
                     ]);
                 }
 
