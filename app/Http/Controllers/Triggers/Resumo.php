@@ -36,6 +36,8 @@ class Resumo extends TriggerController
                 if (str_is($this->chat->username, 'CampuserosClub')) {
                     $text = collect(explode('/res', $text))->last();
                     $text = str_replace(' {escreva aqui}', '', $text);
+                    $text = str_replace('{', '', $text);
+                    $text = str_replace('}', '', $text);
 
                     if (!empty($text)) {
                         $by = $this->message->from->id;
@@ -82,7 +84,8 @@ class Resumo extends TriggerController
 
         $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => "O que você deseja fazer?",
+            'text' => "*O que você deseja fazer?*\n\n_para resumir, use:_\n`/res` `{escreva aqui}`",
+            'parse_mode' => 'markdown',
             'reply_markup' => $markup,
         ]);
     }
