@@ -16,18 +16,10 @@ class Resumo extends TriggerController
             $this->showOptions();
         } else {
             if (str_is('/start resumo:parcial', $text)) {
-                $resumos = \App\Resumo::today()->get();
-
-                $txt = "#RESUMO (parcial) *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
-
-                foreach ($resumos as $resumo) {
-                    $hour = $resumo->created_at->format('H:i');
-                    $txt .= "*[ $hour ]* " . $resumo->text . "\n";
-                }
 
                 $this->telegram->sendMessage([
                     'chat_id' => $this->chat->id,
-                    'text' => $txt,
+                    'text' => $this->resumoToday(),
                     'parse_mode' => 'markdown'
                 ]);
 
@@ -63,6 +55,20 @@ class Resumo extends TriggerController
 
             }
         }
+    }
+
+    protected function resumoToday()
+    {
+        $resumos = \App\Resumo::today()->get();
+
+        $txt = "#RESUMO (parcial) *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
+
+        foreach ($resumos as $resumo) {
+            $hour = $resumo->created_at->format('H:i');
+            $txt .= "*[ $hour ]* " . $resumo->text . "\n";
+        }
+
+        return $txt;
     }
 
     protected function showOptions()
