@@ -19,12 +19,13 @@ class WebhookController extends TelegramController
         \App\Http\Controllers\Triggers\Proximo::class,
         \App\Http\Controllers\Triggers\Sexta::class,
         \App\Http\Controllers\Triggers\Tonico::class,
+        \App\Http\Controllers\Triggers\Resumo::class,
 //        \App\Http\Controllers\Triggers\VoteBan::class,
     ];
 
     public function handle()
     {
-        if (!is_null($this->chat)) {
+        if (!is_null($this->chat) or !is_null($this->callback)) {
             foreach ($this->triggers as $trigger) {
                 new $trigger($this->telegram);
             }

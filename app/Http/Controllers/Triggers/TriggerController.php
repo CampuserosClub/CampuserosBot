@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Triggers;
 
-use App\Http\Controllers\TelegramAPI;
+use App\Telegram\Api;
 use App\Traits\HasAntiSpam;
 use App\Http\Controllers\TelegramController;
 use App\Traits\TelegramHelpers;
@@ -17,7 +17,7 @@ abstract class TriggerController extends TelegramController
     protected $gifs = [];
     protected $voices = [];
 
-    public function __construct(TelegramAPI $telegram)
+    public function __construct(Api $telegram)
     {
         parent::__construct($telegram);
 
