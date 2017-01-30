@@ -16,36 +16,20 @@ class Resumo extends TriggerController
             $this->showOptions();
         } else {
             if (str_is('/start resumo:parcial', $text)) {
-
                 $this->telegram->sendMessage([
                     'chat_id' => $this->chat->id,
                     'text' => $this->resumoToday(),
                     'parse_mode' => 'markdown'
                 ]);
-
             } else {
                 $campuserosclub = str_is($this->chat->username, 'CampuserosClub');
                 $beta = str_is($this->chat->username, 'jaoNoctus');
+
                 if ($campuserosclub or $beta) {
                     $text = collect(explode('/res', $text))->last();
-                    $text = str_replace(' {escreva aqui}', '', $text);
-                    $text = str_replace('{', '', $text);
-                    $text = str_replace('}', '', $text);
+                    $text = $this->sanitizeText($text);
 
-                    if (!empty($text)) {
-                        $by = $this->message->from->id;
-
-                        \App\Resumo::create([
-                            'text' => $text,
-                            'by' => $by,
-                        ]);
-
-                        $this->telegram->sendMessage([
-                            'chat_id' => $this->chat->id,
-                            'text' => 'Anotado ;)',
-                        ]);
-                    }
-
+                    $this->storeResumo($text);
                 } else {
                     $this->telegram->sendMessage([
                         'chat_id' => $this->chat->id,
@@ -61,11 +45,15 @@ class Resumo extends TriggerController
     {
         $resumos = \App\Resumo::today()->get();
 
-        $txt = "#RESUMO (parcial) *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
+        $txt = "#RESUMO *" . \Carbon\Carbon::now()->format('d/m/Y') . "*\n\n";
 
-        foreach ($resumos as $resumo) {
-            $hour = $resumo->created_at->format('H:i');
-            $txt .= "*[ $hour ]* " . $resumo->text . "\n";
+        if (collect($resumos)->isEmpty()) {
+            $txt .= '[nenhuma anotação encontrada]';
+        } else {
+            foreach ($resumos as $resumo) {
+                $hour = $resumo->created_at->format('H:i');
+                $txt .= "*[ $hour ]* " . $resumo->text . "\n";
+            }
         }
 
         return $txt;
@@ -80,7 +68,7 @@ class Resumo extends TriggerController
                 'switch_inline_query_current_chat' => '/res {escreva aqui}'
             ]),
             Keyboard::inlineButton([
-                'text' => 'Ver o resumo parcial de hoje',
+                'text' => 'Ver o resumo',
                 'url' => 'https://t.me/'.$me.'?start=resumo:parcial'
             ]),
         ];
@@ -95,5 +83,37 @@ class Resumo extends TriggerController
             'parse_mode' => 'markdown',
             'reply_markup' => $markup,
         ]);
+    }
+
+    /**
+     * Sanitize text.
+     *
+     * @param $text
+     * @return string
+     */
+    protected function sanitizeText($text)
+    {
+        $text = str_replace(' {escreva aqui}', '', $text);
+        $text = str_replace('{', '', $text);
+        $text = str_replace('}', '', $text);
+
+        return $text;
+    }
+
+    protected function storeResumo($text)
+    {
+        if (!empty($text)) {
+            $by = $this->message->from->id;
+
+            \App\Resumo::create([
+                'text' => $text,
+                'by' => $by,
+            ]);
+
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chat->id,
+                'text' => 'Anotado ;)',
+            ]);
+        }
     }
 }
