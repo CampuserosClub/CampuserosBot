@@ -70,6 +70,19 @@ class BotManController extends Controller
         $this->replySender($bot, $message);
     }
 
+    public function grito(BotMan $bot)
+    {
+        $gritos = collect([
+            'OooOOOOOOOoooOoooooo',
+            'ooooooOOOOOoooOOOOooooo',
+            'oooooooOOOOOOOOoooooO',
+            'OooOOOOOOOoooo',
+            'OoooOoooOoOOO',
+        ]);
+
+        $this->replySender($bot, $gritos->random());
+    }
+
     private function replySender(Botman $bot, $message)
     {
         $payload = $bot->getMessage()->getPayload();
