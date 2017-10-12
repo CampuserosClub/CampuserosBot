@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
-use Illuminate\Http\Request;
 use App\Conversations\ExampleConversation;
+use BotMan\BotMan\Messages\Attachments\Image;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 class BotManController extends Controller
 {
@@ -33,5 +34,12 @@ class BotManController extends Controller
     public function startConversation(BotMan $bot)
     {
         $bot->startConversation(new ExampleConversation());
+    }
+
+    public function biscoitoBolacha(BotMan $bot)
+    {
+        $attach = new Image('https://i.imgur.com/CRJaNRJ.png');
+        $message = OutgoingMessage::create('É biscoito ou bolacha?')->withAttachment($attach);
+        $bot->reply($message);
     }
 }

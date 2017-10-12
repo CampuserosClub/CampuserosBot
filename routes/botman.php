@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BotManController;
 use BotMan\BotMan\BotMan;
 
 $botman = resolve('botman');
@@ -25,3 +26,7 @@ $botman->hears('/about{whatever}', function (BotMan $bot) {
         'disable_web_page_preview' => true,
     ]);
 });
+
+// biscoito ou bolacha
+$botman->hears('{any}bolacha{thing}', BotManController::class . '@biscoitoBolacha');
+$botman->hears('{any}biscoito{thing}', BotManController::class . '@biscoitoBolacha');
