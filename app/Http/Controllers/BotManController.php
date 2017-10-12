@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
+use BotMan\BotMan\Messages\Attachments\Audio;
 use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
@@ -44,8 +45,8 @@ class BotManController extends Controller
 
     public function biscoitoBolacha(BotMan $bot)
     {
-        $attach = new Image('https://i.imgur.com/CRJaNRJ.png');
-        $message = OutgoingMessage::create('É biscoito ou bolacha?')->withAttachment($attach);
+        $img = new Image('https://i.imgur.com/CRJaNRJ.png');
+        $message = OutgoingMessage::create('É biscoito ou bolacha?')->withAttachment($img);
         $this->replySender($bot, $message);
     }
 
@@ -61,11 +62,24 @@ class BotManController extends Controller
         $bot->sendRequest('sendSticker', ['sticker' => $stickers->random()]);
     }
 
+    public function gas(BotMan $bot)
+    {
+        $this->recordingAudio($bot);
+        $audio = new Audio('https://www.myinstants.com/media/sounds/oooo-o-gas-oia-o-gas.mp3');
+        $message = OutgoingMessage::create()->withAttachment($audio);
+        $this->replySender($bot, $message);
+    }
+
     private function replySender(Botman $bot, $message)
     {
         $payload = $bot->getMessage()->getPayload();
         $replyTo = $payload['message_id'];
 
         $bot->reply($message, ['reply_to_message_id' => $replyTo]);
+    }
+
+    private function recordingAudio(Botman $bot)
+    {
+        $bot->sendRequest('sendChatAction', ['action' => 'record_audio']);
     }
 }

@@ -11,3 +11,5 @@ $botman->hears('{any}bolacha{thing}', BotManController::class . '@biscoitoBolach
 $botman->hears('{any}biscoito{thing}', BotManController::class . '@biscoitoBolacha');
 $botman->hears('{any}cafe{thing}', BotManController::class . '@cafe');
 $botman->hears('{any}café{thing}', BotManController::class . '@cafe');
+$botman->hears('{any}gas{thing}', BotManController::class . '@gas');
+$botman->hears('{any}gás{thing}', BotManController::class . '@gas');
