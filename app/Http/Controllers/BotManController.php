@@ -27,19 +27,34 @@ class BotManController extends Controller
         return view('tinker');
     }
 
-    /**
-     * Loaded through routes/botman.php
-     * @param  BotMan $bot
-     */
-    public function startConversation(BotMan $bot)
+    public function about(BotMan $bot)
     {
-        $bot->startConversation(new ExampleConversation());
+        $user = $bot->getUser();
+        $username = $user->getUsername();
+        $name = $user->getFirstName();
+
+        $bot->typesAndWaits(3);
+
+        $sender = is_null($username) ? $name : "@" . $username;
+
+        $bot->reply("{$sender},\nEu sou um bot criado por campuseros, para campuseros 😁");
+        $bot->reply("Se você quiser saber como eu funciono, pode dar uma olhadinha no meu código:\nhttps://github.com/CampuserosClub/CampuserosBot", [
+            'disable_web_page_preview' => true,
+        ]);
     }
 
     public function biscoitoBolacha(BotMan $bot)
     {
         $attach = new Image('https://i.imgur.com/CRJaNRJ.png');
         $message = OutgoingMessage::create('É biscoito ou bolacha?')->withAttachment($attach);
-        $bot->reply($message);
+        $this->replySender($bot, $message);
+    }
+
+    private function replySender(Botman $bot, $message)
+    {
+        $payload = $bot->getMessage()->getPayload();
+        $replyTo = $payload['message_id'];
+
+        $bot->reply($message, ['reply_to_message_id' => $replyTo]);
     }
 }
