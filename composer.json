@@ -1,23 +1,32 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "botman/studio",
+    "description": "BotMan Chatbot framework.",
+    "keywords": [
+        "botman",
+        "chatbot",
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
-        "irazasyed/telegram-bot-sdk": "dev-develop",
-        "guzzlehttp/guzzle": "^6.2"
+        "php": ">=7.0",
+        "botman/botman": "~2.0",
+        "botman/driver-telegram": "^1.1",
+        "botman/driver-web": "~1.0",
+        "botman/studio-addons": "~1.0",
+        "botman/tinker": "~1.0",
+        "clue/stdio-react": "^1.0",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "mpociot/slack-client": "^0.3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.0",
-        "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*"
+        "phpunit/phpunit": "~6.0",
+        "filp/whoops": "~2.0"
     },
     "autoload": {
         "classmap": [
@@ -28,9 +37,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
@@ -41,15 +50,27 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan migrate --force",
+            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     }
 }
