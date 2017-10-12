@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
-use App\Conversations\ExampleConversation;
 use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
@@ -48,6 +47,18 @@ class BotManController extends Controller
         $attach = new Image('https://i.imgur.com/CRJaNRJ.png');
         $message = OutgoingMessage::create('É biscoito ou bolacha?')->withAttachment($attach);
         $this->replySender($bot, $message);
+    }
+
+    public function cafe(BotMan $bot)
+    {
+        $stickers = collect([
+            'BQADAQADigADc6QYA5uQxxPZmMZGAg',
+            'BQADAQADYQADC1TfAAHnb5n94sar6AI',
+            'BQADAgADgAADGgZFBBPEOyAbYERuAg',
+            'BQADAQADVgEAAtpxZgdD4Q1UGK41qgI',
+        ]);
+
+        $bot->sendRequest('sendSticker', ['sticker' => $stickers->random()]);
     }
 
     private function replySender(Botman $bot, $message)
