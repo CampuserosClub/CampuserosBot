@@ -1,25 +1,22 @@
 <?php
 
-abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use App\BotManTester;
+use BotMan\BotMan\BotMan;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+    use CreatesApplication;
 
     /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
+     * @var BotMan
      */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../bootstrap/app.php';
+    protected $botman;
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
-    }
+    /**
+     * @var BotManTester
+     */
+    protected $bot;
 }
