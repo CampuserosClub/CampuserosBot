@@ -1,5 +1,13 @@
 <?php
 
+use BotMan\BotMan\BotMan;
+
 Route::post('/', function () {
-    return 'ok';
+    $botman = resolve('botman');
+
+    $botman->hears("{message}", function (BotMan $bot, $message) {
+        // TODO
+    });
+
+    $botman->listen();
 });
