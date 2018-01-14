@@ -6,6 +6,7 @@ use App\Http\Controllers\Triggers\About;
 use App\Http\Controllers\Triggers\BiscoitoBolacha;
 use App\Http\Controllers\Triggers\Grito;
 use App\Http\Controllers\Triggers\Marmotex;
+use App\Http\Controllers\Triggers\Pru;
 use BotMan\BotMan\BotMan;
 
 class WebhookController extends Controller
@@ -15,6 +16,7 @@ class WebhookController extends Controller
         BiscoitoBolacha::class,
         Grito::class,
         Marmotex::class,
+        Pru::class,
     ];
 
     public static function handle(BotMan $bot, $message)

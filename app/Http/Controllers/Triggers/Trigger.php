@@ -58,7 +58,13 @@ abstract class Trigger
     }
 
     protected function randomStickers() {
-        return null;
+        $stickers = collect($this->stickers);
+
+        if($stickers->isNotEmpty()) {
+            $this->bot->sendRequest('sendSticker', [
+                'sticker' => $stickers->random()
+            ]);
+        }
     }
 
     protected function randomGifs() {
