@@ -7,6 +7,7 @@ use App\Http\Controllers\Triggers\BiscoitoBolacha;
 use App\Http\Controllers\Triggers\Cafe;
 use App\Http\Controllers\Triggers\Grito;
 use App\Http\Controllers\Triggers\Marmotex;
+use App\Http\Controllers\Triggers\Pizza;
 use App\Http\Controllers\Triggers\Pru;
 use BotMan\BotMan\BotMan;
 
@@ -18,6 +19,7 @@ class WebhookController extends Controller
         Cafe::class,
         Grito::class,
         Marmotex::class,
+        Pizza::class,
         Pru::class,
     ];
 
