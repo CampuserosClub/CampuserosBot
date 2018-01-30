@@ -18,7 +18,7 @@ class WebhookController extends Controller
         BiscoitoBolacha::class,
         Cafe::class,
         Grito::class,
-        Marmotex::class,
+        // Marmotex::class,
         Pizza::class,
         Pru::class,
     ];
